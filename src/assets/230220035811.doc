@@ -1,0 +1,246 @@
+ 
+ 
+ </form>
+
+	  	<table class="table table-bordered"  style="width:100%;font-size:x-small;border-collapse:collapse" border="1">
+	  		<thead>
+	  			<tr>
+    	  			<th>No</th>
+    	  			<th>Tipe</th>
+    	  			<th>Visual</th>
+    	  	        <th>Lokasi</th>
+    	  	        <th>Deskripsi</th>
+    	  	        <th>Status</th>
+    	  	        <th>Rekomendasi</th>
+    	  	        <th>Standar</th>
+    	  	        <th>Catatan</th>
+    	
+    	  		</tr>
+	  		</thead>
+	  		<tbody>
+	  					  			<tr>
+		  				<td>1</td>
+		  							<td>LISTRIK ARUS LEMAH</td>
+		  					<td><img src="https://appinspector.okeadmin.com/myupload/a7a452f675275b1e33a140b0a26b12331bb400bb_aktifitas.png" height="90" width="90" /></td>
+		  					<td>bandung</td>
+		  					<td><ul>
+                                                                    <li>TIDAK DILENGKAPI DENGAN RAMBU BAHAYA</li>
+                                                                    <li>TIDAK DILENGKAPI DENGAN GAMBAR</li>
+                                                                    <li>TIDAK DILENGKAPI DENGAN GROUNDING</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Major )</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>MENAMBAHKAN RAMBU BAHAYA</li>
+                                                                    <li>MENAMBAHKAN GAMBAR INSTALASI</li>
+                                                                    <li>MENAMBAHKAN INSTALASI GROUNDING</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>PUIL 2011 Amd.2016 132.12.2 MOD (2.3.13)</li>
+                                                                    <li>PUIL 2011 Amd.2016 132.12.2 MOD (2.3.13)</li>
+                                  		  					</td></ul>
+		  				
+		  					<td>siap</td>
+		  						
+		  
+
+
+		  				
+		  				
+                	  			
+    	  			
+		  			
+		  			</tr>
+
+		  				  			<tr>
+		  				<td>2</td>
+		  							<td>LISTRIK ARUS LEMAH</td>
+		  					<td><img src="https://appinspector.okeadmin.com/myupload/70ffa5bacd0b9290237893a0f8f3af8d9ad1c4ee_aktifitas.png" height="90" width="90" /></td>
+		  					<td>redaksi</td>
+		  					<td><ul>
+                                                                    <li>KONDISI BAIK</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>MELAKUKAN PERAWATAN RUTIN</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                  		  					</td></ul>
+		  				
+		  					<td>ya</td>
+		  						
+		  
+
+
+		  				
+		  				
+                	  			
+    	  			
+		  			
+		  			</tr>
+
+		  				  			<tr>
+		  				<td>3</td>
+		  							<td>LISTRIK ARUS LEMAH</td>
+		  					<td><img src="https://appinspector.okeadmin.com/myupload/e051ee29abdc23ffaf4bd5a87ebaeb4972718099_aktifitas.png" height="90" width="90" /></td>
+		  					<td>trf</td>
+		  					<td><ul>
+                                                                    <li>TIDAK DILENGKAPI DENGAN RAMBU BAHAYA</li>
+                                                                    <li>TIDAK DILENGKAPI DENGAN GAMBAR</li>
+                                                                    <li>RUSAK FISIK</li>
+                                                                    <li>TIDAK DILENGKAPI DENGAN GROUNDING</li>
+                                                                    <li>RUANG BEBAS PANEL TIDAK MENCUKUPI</li>
+                                                                    <li>LAMPU INDIKATOR RUSAK</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Major )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>MENAMBAHKAN RAMBU BAHAYA</li>
+                                                                    <li>MENAMBAHKAN GAMBAR INSTALASI</li>
+                                                                    <li>MELAKUKAN PENGGANTIAN / PERBAIKAN</li>
+                                                                    <li>MENAMBAHKAN INSTALASI GROUNDING</li>
+                                                                    <li>MENAMBAHKAN RUANG BEBAS PANEL</li>
+                                                                    <li>MELAKUKAN PERBAIKAN LAMPU PANEL</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>PUIL 2011 Amd.2016 132.12.2 MOD (2.3.13)</li>
+                                                                    <li>PUIL 2011 Amd.2016 132.12.2 MOD (2.3.13)</li>
+                                                                    <li>PUIL 2011 ( 2014 ) BAGIAN 5 - 54</li>
+                                                                    <li>PUIL 2000 6.6.3 Instrument ukur dan indikator</li>
+                                  		  					</td></ul>
+		  				
+		  					<td>rrr</td>
+		  						
+		  
+
+
+		  				
+		  				
+                	  			
+    	  			
+		  			
+		  			</tr>
+
+		  				  			<tr>
+		  				<td>4</td>
+		  							<td>LISTRIK ARUS LEMAH</td>
+		  					<td><img src="https://appinspector.okeadmin.com/myupload/9fb50e3e0c2a8c964165fd91664f0297bc996a13_aktifitas.png" height="90" width="90" /></td>
+		  					<td>hshs</td>
+		  					<td><ul>
+                                                                    <li>TIDAK DILENGKAPI DENGAN CHECKLIST PEMELIHARAAN</li>
+                                                                    <li>RUSAK FISIK</li>
+                                                                    <li>RUANG BEBAS PANEL TIDAK MENCUKUPI</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>MENAMBAHKAN CHECKLIST PEMELIHARAAN</li>
+                                                                    <li>MELAKUKAN PENGGANTIAN / PERBAIKAN</li>
+                                                                    <li>MENAMBAHKAN RUANG BEBAS PANEL</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>PUIL 2011 Amd.2016 132.12.2 MOD (2.3.13)</li>
+                                                                    <li>PUIL 2011 ( 2014 ) BAGIAN 5 - 54</li>
+                                  		  					</td></ul>
+		  				
+		  					<td>uuu</td>
+		  						
+		  
+
+
+		  				
+		  				
+                	  			
+    	  			
+		  			
+		  			</tr>
+
+		  				  			<tr>
+		  				<td>5</td>
+		  							<td>LISTRIK ARUS LEMAH</td>
+		  					<td><img src="https://appinspector.okeadmin.com/myupload/810a8805de62fa0cba0156b73c6f28b7b34fbe32_aktifitas.png" height="90" width="90" /></td>
+		  					<td>rumah</td>
+		  					<td><ul>
+                                                                    <li>TIDAK DILENGKAPI DENGAN RAMBU BAHAYA</li>
+                                                                    <li>RUSAK FISIK</li>
+                                                                    <li>LAMPU INDIKATOR RUSAK</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>MENAMBAHKAN RAMBU BAHAYA</li>
+                                                                    <li>MELAKUKAN PENGGANTIAN / PERBAIKAN</li>
+                                                                    <li>MELAKUKAN PERBAIKAN LAMPU PANEL</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>PUIL 2011 Amd.2016 132.12.2 MOD (2.3.13)</li>
+                                                                    <li>PUIL 2000 6.6.3 Instrument ukur dan indikator</li>
+                                  		  					</td></ul>
+		  				
+		  					<td>abc</td>
+		  						
+		  
+
+
+		  				
+		  				
+                	  			
+    	  			
+		  			
+		  			</tr>
+
+		  			  		</tbody>
+	  	</table>
+
+
+
+</div>
+
+<script type="text/javascript">
+
+
+	function copyToClipboard(element) {
+	  var $temp = $("<input>");
+	  $("body").append($temp);
+	  $temp.val($(element).text()).select();
+	  document.execCommand("copy");
+	  $temp.remove();
+	}
+
+
+	$(".alink").click(function(e){
+		e.preventDefault();
+		var link = $(this).attr('data-id');
+		$("#p1").text(link);
+		copyToClipboard("#p1");
+		$(this).removeClass('btn-success');
+		$(this).addClass('btn-secondary');
+
+		$(this).text('Copied');
+	})
+	
+	$(document).ready(function() {
+    $('.tabza2').DataTable( {
+        "scrollX": true
+    } );
+} );
+</script>
+
+
+

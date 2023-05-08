@@ -1,0 +1,173 @@
+ 
+ 
+ </form>
+
+	  	<table class="table table-bordered"  style="width:100%;font-size:small;border-collapse:collapse" border="1">
+	  		<thead>
+	  			<tr>
+    	  			<th>No</th>
+    	  			<th>Tipe</th>
+    	  			<!--<th>Visual</th>-->
+    	  	        <th>Lokasi</th>
+    	  	        <th>Deskripsi</th>
+    	  	        <th>Status</th>
+    	  	        <th>Rekomendasi</th>
+    	  	        <th>Standar</th>
+    	  	        <th>Catatan</th>
+    	
+    	  		</tr>
+	  		</thead>
+	  		<tbody>
+	  					  			<tr>
+		  				<td>1</td>
+		  							<td>PANEL LISTRIK</td>
+		  					<!--<td><img src="https://appinspector.okeadmin.com/myupload/13670560b14ae7ccba0ede197c3d42f55096f784_aktifitas.png" style="transform: rotate(90deg);margin-left:2%" height="90" /></td>-->
+		  					<td>222</td>
+		  					<td><ul>
+                                                                    <li>TIDAK DILENGKAPI DENGAN CHECKLIST PEMELIHARAAN</li>
+                                                                    <li>TIDAK DILENGKAPI DENGAN GAMBAR</li>
+                                                                    <li>TIDAK DILENGKAPI DENGAN PENANDA</li>
+                                                                    <li>TIDAK DILENGKAPI DENGAN GROUNDING</li>
+                                                                    <li>RUANG BEBAS PANEL TIDAK MENCUKUPI</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Major )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>MENAMBAHKAN CHECKLIST PEMELIHARAAN</li>
+                                                                    <li>MENAMBAHKAN GAMBAR INSTALASI</li>
+                                                                    <li>MENAMBAHKAN PENANDA</li>
+                                                                    <li>MENAMBAHKAN INSTALASI GROUNDING</li>
+                                                                    <li>MENAMBAHKAN RUANG BEBAS PANEL</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>PUIL 2011 Amd.2016 132.12.2 MOD (2.3.13)</li>
+                                                                    <li>PUIL 2011 Amd.2016 132.12.2 MOD (2.3.13)</li>
+                                                                    <li>PUIL 2011 Amd.2016 132.12.2 MOD (2.3.13)</li>
+                                                                    <li>PUIL 2011 ( 2014 ) BAGIAN 5 - 54</li>
+                                                                    <li>PUIL 2011 Amandemen 1 ( 2016 ) 132.12.2 MOD (2.3.13)</li>
+                                  		  					</td></ul>
+		  				
+		  					<td>2</td>
+		  						
+		  
+
+
+		  				
+		  				
+                	  			
+    	  			
+		  			
+		  			</tr>
+
+		  				  			<tr>
+		  				<td>2</td>
+		  							<td>PANEL LISTRIK</td>
+		  					<!--<td><img src="https://appinspector.okeadmin.com/myupload/c6c2a9bde0e662b74c80cd1e0b7053c919ee6f10_aktifitas.png" style="transform: rotate(90deg);margin-left:2%" height="90" /></td>-->
+		  					<td></td>
+		  					<td><ul>
+                                                                    <li>TIDAK DILENGKAPI DENGAN GROUNDING</li>
+                                                                    <li>SIRKIT TIDAK DILENGKAPI DENGAN GPAL</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>Tidak Sesuai Standar ( Major )</li>
+                                                                    <li>Tidak Sesuai Standar ( Major )</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>MENAMBAHKAN INSTALASI GROUNDING</li>
+                                                                    <li>MENAMBAHKAN GPAL PADA SIRKIT</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>PUIL 2011 ( 2014 ) BAGIAN 5 - 54</li>
+                                                                    <li>PUIL 2011 Amd.2016 314.1</li>
+                                  		  					</td></ul>
+		  				
+		  					<td></td>
+		  						
+		  
+
+
+		  				
+		  				
+                	  			
+    	  			
+		  			
+		  			</tr>
+
+		  				  			<tr>
+		  				<td>3</td>
+		  							<td>PANEL LISTRIK</td>
+		  					<!--<td><img src="https://appinspector.okeadmin.com/myupload/77ef6e4d8a4f22069146253080e185d5f560e194_aktifitas.png" style="transform: rotate(90deg);margin-left:2%" height="90" /></td>-->
+		  					<td></td>
+		  					<td><ul>
+                                                                    <li>TIDAK DILENGKAPI DENGAN CHECKLIST PEMELIHARAAN</li>
+                                                                    <li>TIDAK DILENGKAPI DENGAN PENANDA</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                                                    <li>Tidak Sesuai Standar ( Minor )</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>MENAMBAHKAN CHECKLIST PEMELIHARAAN</li>
+                                                                    <li>MENAMBAHKAN PENANDA</li>
+                                  		  					</td></ul>
+		  					<td><ul>
+                                                                    <li>PUIL 2011 Amd.2016 132.12.2 MOD (2.3.13)</li>
+                                                                    <li>PUIL 2011 Amd.2016 132.12.2 MOD (2.3.13)</li>
+                                  		  					</td></ul>
+		  				
+		  					<td></td>
+		  						
+		  
+
+
+		  				
+		  				
+                	  			
+    	  			
+		  			
+		  			</tr>
+
+		  			  		</tbody>
+	  	</table>
+
+
+
+</div>
+
+<script type="text/javascript">
+
+
+	function copyToClipboard(element) {
+	  var $temp = $("<input>");
+	  $("body").append($temp);
+	  $temp.val($(element).text()).select();
+	  document.execCommand("copy");
+	  $temp.remove();
+	}
+
+
+	$(".alink").click(function(e){
+		e.preventDefault();
+		var link = $(this).attr('data-id');
+		$("#p1").text(link);
+		copyToClipboard("#p1");
+		$(this).removeClass('btn-success');
+		$(this).addClass('btn-secondary');
+
+		$(this).text('Copied');
+	})
+	
+	$(document).ready(function() {
+    $('.tabza2').DataTable( {
+        "scrollX": true
+    } );
+} );
+</script>
+
+
+
