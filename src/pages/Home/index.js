@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View, Image, FlatList, ActivityIndicator, Dimensions, ImageBackground } from 'react-native'
+import { Alert, StyleSheet, Text, View, Image, FlatList, ActivityIndicator, Dimensions, ImageBackground, Modal, Pressable } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { apiURL, getData, MYAPP, storeData } from '../../utils/localStorage';
@@ -19,33 +19,38 @@ import CountDown from 'react-native-countdown-component';
 
 
 export default function Home({ navigation }) {
-
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
+  const [modalVisible3, setModalVisible3] = useState(false);
   const data = [
     { text: "APPLE", image: require('../../assets/i1.png'), },
     { text: "BALL", image: require('../../assets/i2.png') },
     { text: "CAT", image: require('../../assets/i3.png') },
-    { text: "DOG", image: require('../../assets/i1.png') },
-    { text: "ELEPHANT", image: require('../../assets/i1.png') },
-    { text: "FISH", image: require('../../assets/i1.png') },
-    { text: "GIRAFFE", image: require('../../assets/i1.png') },
-    { text: "HAT", image: require('../../assets/i1.png') },
-    { text: "LION", image: require('../../assets/i1.png') },
-    { text: "MONKEY", image: require('../../assets/i1.png') },
-    { text: "HEAD", image: require('../../assets/i1.png') },
-    { text: "HAIR", image: require('../../assets/i1.png') },
-    { text: "EYE", image: require('../../assets/i1.png') },
-    { text: "EAR", image: require('../../assets/i1.png') },
-    { text: "NOSE", image: require('../../assets/i1.png') },
-    { text: "MOUTH", image: require('../../assets/i1.png') },
-    { text: "TOOTH", image: require('../../assets/i1.png') },
-    { text: "TONGUE", image: require('../../assets/i1.png') },
-    { text: "FACE", image: require('../../assets/i1.png') },
-    { text: "HAND", image: require('../../assets/i1.png') },
+    { text: "DOG", image: require('../../assets/i4.png') },
+    { text: "ELEPHANT", image: require('../../assets/i5.png') },
+    { text: "FISH", image: require('../../assets/i6.png') },
+    { text: "GIRAFFE", image: require('../../assets/i7.png') },
+    { text: "HAT", image: require('../../assets/i8.png') },
+    { text: "LION", image: require('../../assets/i9.png') },
+    { text: "MONKEY", image: require('../../assets/i10.png') },
+    { text: "HEAD", image: require('../../assets/i11.png') },
+    { text: "HAIR", image: require('../../assets/i12.png') },
+    { text: "EYE", image: require('../../assets/i13.png') },
+    { text: "EAR", image: require('../../assets/i14.png') },
+    { text: "NOSE", image: require('../../assets/i15.png') },
+    { text: "MOUTH", image: require('../../assets/i16.png') },
+    { text: "TOOTH", image: require('../../assets/i17.png') },
+    { text: "TONGUE", image: require('../../assets/i18.png') },
+    { text: "FACE", image: require('../../assets/i19.png') },
+    { text: "HAND", image: require('../../assets/i20.png') },
   ]
 
   const [nomor, setNomor] = useState(0);
 
-  const [tmp, setTemp] = useState([])
+  const [nilai, setNilai] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+
+  const [tmp, setTemp] = useState([]);
+  const [waktu, setWaktu] = useState(3600);
 
 
   const getRandom = (start, end, total) => {
@@ -75,46 +80,49 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
 
-    getRandom(0, data[nomor].text.split("").length - 1, 5)
-
-
+    getRandom(0, data[nomor].text.split("").length - 1, data[nomor].text.split("").length);
 
   }, []);
 
   const [pilih, setPilih] = useState([])
 
+  const lanjut = () => {
+
+    if (nomor == 19) {
+
+      setModalVisible3(true);
+    } else {
+      setWaktu(180)
+      setNomor(nomor + 1);
+      setPilih([]);
+      getRandom(0, data[nomor + 1].text.split("").length - 1, data[nomor + 1].text.split("").length);
+
+    }
+  }
 
 
   const sendServer = () => {
-    alert('habis')
-  }
-  let haveIt = [];
 
-  const generateUniqueRandom = (maxNr) => {
-    //Generate random number
-    let random = (Math.random() * maxNr).toFixed();
+    if (pilih.join("") == data[nomor].text) {
+      setModalVisible(true);
 
-    //Coerce to number by boxing
-    random = Number(random);
+      let tmp = nilai;
+      tmp[nomor] = 5,
+        setNilai(tmp);
 
-    if (!haveIt.includes(random)) {
-      haveIt.push(random);
-      return random;
+      // setNilai([...nilai, [nomor] = 5])
+
     } else {
-      if (haveIt.length < maxNr) {
-        //Recursively generate number
-        return generateUniqueRandom(maxNr);
-      } else {
-        console.log('No more numbers available.')
-        return false;
-      }
+      setModalVisible2(true);
     }
   }
 
 
 
+
+
   return (
-    <SafeAreaView style={{
+    <ImageBackground source={require('../../assets/home.png')} style={{
       flex: 1,
       backgroundColor: colors.white,
     }}>
@@ -128,7 +136,7 @@ export default function Home({ navigation }) {
           alignItems: 'center'
         }}>
           <CountDown
-            until={60 * 3}
+            until={waktu}
             size={15}
             onFinish={sendServer}
             digitStyle={{ backgroundColor: colors.primary }}
@@ -152,7 +160,7 @@ export default function Home({ navigation }) {
               textAlign: 'center',
               fontFamily: fonts.secondary[600],
               color: colors.white
-            }}>1/20</Text>
+            }}>{nomor + 1}/20</Text>
           </View>
         </View>
 
@@ -210,7 +218,7 @@ export default function Home({ navigation }) {
                 margin: 5,
                 borderRadius: 5,
               }}>
-                <TouchableOpacity onPress={() => console.log(haveIt)} style={{
+                <View style={{
                   padding: 10,
                   justifyContent: 'center',
                   alignItems: 'center'
@@ -220,7 +228,7 @@ export default function Home({ navigation }) {
                     color: colors.black,
                     fontSize: 20,
                   }}>{pilih[index]} </Text>
-                </TouchableOpacity>
+                </View>
               </View>
             )
           })}
@@ -238,8 +246,6 @@ export default function Home({ navigation }) {
         }}>
 
           {data[nomor].text.split("").map((i, index) => {
-
-
 
 
             return (
@@ -280,28 +286,176 @@ export default function Home({ navigation }) {
       </View>
       {
         pilih.length == data[nomor].text.split("").length && <TouchableOpacity
-          onPress={() => {
-
-            if (pilih.join("") == data[nomor].text) {
-              alert("BETUL")
-            } else {
-              alert("SALAH")
-            }
-
-          }}
+          onPress={sendServer}
           style={{
-            backgroundColor: colors.primary,
+            backgroundColor: nomor == 19 ? colors.success : colors.primary,
             padding: 10,
           }}>
           <Text style={{
             fontFamily: fonts.secondary[600],
             color: colors.white,
             textAlign: 'center'
-          }}>SELANJUTNYA</Text>
+          }}>{nomor == 19 ? 'FINISH' : 'NEXT'}</Text>
         </TouchableOpacity>
       }
 
-    </SafeAreaView >
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+
+          setModalVisible(!modalVisible);
+          lanjut();
+        }}>
+        <View style={{
+          flex: 1,
+          opacity: 0.8,
+          width: windowWidth,
+          height: windowHeight / 2,
+          backgroundColor: colors.black,
+          justifyContent: 'center',
+          padding: 10,
+        }}>
+          <View style={{
+            backgroundColor: colors.white,
+            height: windowHeight / 2,
+            borderRadius: 10,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <Image source={require('../../assets/benar.png')} style={{
+              width: '100%',
+              height: windowHeight / 2.7,
+              resizeMode: 'contain'
+            }} />
+            <Pressable onPress={() => {
+              setModalVisible(!modalVisible);
+              lanjut();
+            }} style={{
+              backgroundColor: colors.primary,
+              width: 80,
+              borderRadius: 10,
+              padding: 10,
+            }}>
+              <Text style={{
+                fontFamily: fonts.secondary[600],
+                fontSize: 18,
+                textAlign: 'center',
+              }}>OK</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible2}
+        onRequestClose={() => {
+          lanjut();
+          setModalVisible2(!modalVisible2);
+        }}>
+        <View style={{
+          flex: 1,
+          opacity: 0.8,
+          width: windowWidth,
+          height: windowHeight / 2,
+          backgroundColor: colors.black,
+          justifyContent: 'center',
+          padding: 10,
+        }}>
+          <View style={{
+            backgroundColor: colors.white,
+            height: windowHeight / 2,
+            borderRadius: 10,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <Image source={require('../../assets/salah.png')} style={{
+              width: '100%',
+              height: windowHeight / 2.7,
+              resizeMode: 'contain'
+            }} />
+            <Pressable onPress={() => {
+              setModalVisible2(!modalVisible2);
+              lanjut();
+            }} style={{
+              backgroundColor: colors.primary,
+              width: 80,
+              borderRadius: 10,
+              padding: 10,
+            }}>
+              <Text style={{
+                fontFamily: fonts.secondary[600],
+                fontSize: 18,
+                textAlign: 'center',
+              }}>OK</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible3}
+        onRequestClose={() => {
+          navigation.replace('Login');
+          setModalVisible3(!modalVisible3);
+        }}>
+        <View style={{
+          flex: 1,
+          opacity: 0.8,
+          width: windowWidth,
+          height: windowHeight / 2,
+          backgroundColor: colors.black,
+          justifyContent: 'center',
+          padding: 10,
+        }}>
+          <View style={{
+            backgroundColor: colors.white,
+            height: windowHeight / 2,
+            borderRadius: 10,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <Image source={require('../../assets/skor.png')} style={{
+              width: '100%',
+              height: windowHeight / 4,
+              resizeMode: 'contain'
+            }} />
+            <Text style={{
+              fontFamily: fonts.secondary[400],
+              fontSize: 30,
+            }}>SCORE</Text>
+            <Text style={{
+              marginVertical: 10,
+              fontFamily: fonts.secondary[600],
+              fontSize: 50,
+            }}>{nilai.reduce((partialSum, a) => partialSum + a, 0)}</Text>
+            <Pressable onPress={() => {
+              setModalVisible3(!modalVisible3);
+              navigation.replace('Login');
+            }} style={{
+              backgroundColor: colors.primary,
+              width: 80,
+              borderRadius: 10,
+              padding: 10,
+            }}>
+              <Text style={{
+                fontFamily: fonts.secondary[600],
+                fontSize: 18,
+                textAlign: 'center',
+              }}>OK</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+
+    </ImageBackground >
   )
 }
 
