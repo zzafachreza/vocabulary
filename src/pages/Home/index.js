@@ -280,24 +280,37 @@ export default function Home({ navigation }) {
 
         </View>
 
+        <View style={{
+          marginTop: 10,
+          paddingHorizontal: windowWidth / 3,
+
+        }}>
+          <MyButton onPress={() => setPilih([])} tinggi={40} title="RESET" Icons="refresh" warna={colors.border} />
+        </View>
 
 
 
       </View>
-      {
-        pilih.length == data[nomor].text.split("").length && <TouchableOpacity
-          onPress={sendServer}
-          style={{
-            backgroundColor: nomor == 19 ? colors.success : colors.primary,
-            padding: 10,
-          }}>
-          <Text style={{
-            fontFamily: fonts.secondary[600],
-            color: colors.white,
-            textAlign: 'center'
-          }}>{nomor == 19 ? 'FINISH' : 'NEXT'}</Text>
-        </TouchableOpacity>
-      }
+      <View style={{
+        height: 50,
+      }}>
+        {
+          pilih.length >= data[nomor].text.split("").length && <TouchableOpacity
+            onPress={sendServer}
+            style={{
+              backgroundColor: nomor == 19 ? colors.success : colors.primary,
+              height: 50,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+            <Text style={{
+              fontFamily: fonts.secondary[600],
+              color: colors.white,
+              textAlign: 'center'
+            }}>{nomor == 19 ? 'FINISH' : 'NEXT'}</Text>
+          </TouchableOpacity>
+        }
+      </View>
 
       <Modal
         animationType="fade"

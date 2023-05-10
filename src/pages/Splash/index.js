@@ -51,7 +51,7 @@ export default function Splash({ navigation }) {
     <View
       style={{
         flex: 1,
-        backgroundColor: colors.white,
+        backgroundColor: colors.primary,
       }}>
       <View style={{
         flex: 1,
@@ -70,7 +70,7 @@ export default function Splash({ navigation }) {
             }
           }
         />
-        <ActivityIndicator size="large" color={colors.primary} />
+        <ActivityIndicator size="large" color={colors.white} />
 
 
 

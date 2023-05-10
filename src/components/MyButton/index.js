@@ -9,6 +9,7 @@ export default function MyButton({
   warna = colors.secondary,
   onPress,
   Icons,
+  tinggi = 50,
   radius = 10,
   colorText = 'white',
   fontWeight = 'normal',
@@ -18,7 +19,7 @@ export default function MyButton({
 }) {
   return (
     <TouchableOpacity
-      style={styles(warna, radius, borderSize, borderColor).btn}
+      style={styles(warna, radius, borderSize, borderColor, tinggi).btn}
       onPress={onPress}>
       <Icon type="ionicon" name={Icons} color={iconColor} size={windowWidth / 30} />
       <Text
@@ -36,10 +37,10 @@ export default function MyButton({
   );
 }
 
-const styles = (warna, radius, borderSize, borderColor) =>
+const styles = (warna, radius, borderSize, borderColor, tinggi) =>
   StyleSheet.create({
     btn: {
-      height: 50,
+      height: tinggi,
       borderRadius: radius,
       justifyContent: 'center',
       alignItems: 'center',
