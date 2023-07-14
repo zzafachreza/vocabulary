@@ -10,8 +10,17 @@ import {
 import { MyButton } from '../../components';
 import { colors, fonts, windowHeight, windowWidth } from '../../utils';
 import { getData } from '../../utils/localStorage';
+import Sound from 'react-native-sound';
+var whoosh = new Sound(
+  require('../../assets/suara.mp3'),
+  Sound.MAIN_BUNDLE,
+).release();
 
 export default function Splash({ navigation }) {
+
+  useEffect(() => {
+    whoosh.play();
+  }, [])
   const top = new Animated.Value(0.3);
 
   const animasi = () => {
@@ -38,9 +47,14 @@ export default function Splash({ navigation }) {
     setTimeout(() => {
       getData('user').then(res => {
         if (!res) {
-          navigation.replace('Login')
+          navigation.replace('GetStarted')
         } else {
-          navigation.replace('Login')
+          if (res.level == 'GURU') {
+            navigation.replace('HomeGuru')
+          } else {
+            navigation.replace('Mulai')
+          }
+
         }
       })
     }, 1500)

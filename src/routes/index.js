@@ -44,6 +44,9 @@ import {
   ASoal3,
   ASoal4,
   ASoal5,
+  Mulai,
+  LoginGuru,
+  HomeGuru,
 } from '../pages';
 import { colors } from '../utils';
 import { Icon } from 'react-native-elements';
@@ -61,6 +64,37 @@ export default function Router() {
         }}
       />
 
+      <Stack.Screen
+        name="GetStarted"
+        component={GetStarted}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="Mulai"
+        component={Mulai}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="LoginGuru"
+        component={LoginGuru}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="HomeGuru"
+        component={HomeGuru}
+        options={{
+          headerShown: false,
+        }}
+      />
 
       <Stack.Screen
         name="Login"
@@ -107,9 +141,9 @@ export default function Router() {
           headerShown: true,
           headerTitle: 'Informasi Pengguna',
           headerStyle: {
-            backgroundColor: colors.white,
+            backgroundColor: colors.primary,
           },
-          headerTintColor: colors.black,
+          headerTintColor: colors.white,
         }}
       />
       <Stack.Screen
@@ -535,13 +569,6 @@ export default function Router() {
       />
 
 
-      <Stack.Screen
-        name="GetStarted"
-        component={GetStarted}
-        options={{
-          headerShown: false,
-        }}
-      />
 
 
       <Stack.Screen

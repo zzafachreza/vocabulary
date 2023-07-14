@@ -13,6 +13,7 @@ export default function MyInput({
   maxLength,
   iconname,
   onChangeText,
+  textColor = colors.primary,
   value,
   keyboardType,
   secureTextEntry,
@@ -42,7 +43,7 @@ export default function MyInput({
         <Text
           style={{
             fontFamily: fonts.secondary[600],
-            color: colors.primary,
+            color: textColor,
             left: icon ? 10 : 5,
             fontSize: 12,
             ...styleLabel,
@@ -95,7 +96,7 @@ export default function MyInput({
             alignItems: 'center',
             height: '100%'
           }}>
-            <Icon type="ionicon" name={!tutup ? 'eye-off' : 'eye'} color={colorIcon} size={18} />
+            <Icon type="ionicon" name={!tutup ? 'eye-off' : 'eye'} color={colors.primary} size={18} />
           </TouchableOpacity>}
       </View>
 

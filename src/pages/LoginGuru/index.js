@@ -7,7 +7,7 @@ import { apiURL, api_token, MYAPP, storeData } from '../../utils/localStorage';
 import { showMessage } from 'react-native-flash-message';
 
 
-export default function Login({ navigation }) {
+export default function LoginGuru({ navigation }) {
 
   const [kirim, setKirim] = useState({
     api_token: api_token,
@@ -38,7 +38,7 @@ export default function Login({ navigation }) {
       console.log(kirim);
 
       axios
-        .post(apiURL + 'login', kirim)
+        .post(apiURL + 'login_guru', kirim)
         .then(res => {
           setLoading(false);
           console.log(res.data);
@@ -49,7 +49,7 @@ export default function Login({ navigation }) {
             })
           } else {
             storeData('user', res.data.data);
-            navigation.replace('Mulai')
+            navigation.replace('HomeGuru')
           }
 
         });
@@ -73,7 +73,7 @@ export default function Login({ navigation }) {
 
   return (
     <>
-      <ScrollView style={{ flex: 1, backgroundColor: colors.primary, position: 'relative' }}>
+      <ScrollView style={{ flex: 1, backgroundColor: colors.white, position: 'relative' }}>
 
         <View style={{
           flexDirection: 'row',
@@ -99,14 +99,14 @@ export default function Login({ navigation }) {
 
 
 
-        <View style={{ padding: 20, flex: 1, backgroundColor: colors.primary }}>
-          <MyInput textColor={colors.white} colorIcon={colors.white} label="Username" onChangeText={val => setKirim({
+        <View style={{ padding: 20, flex: 1, backgroundColor: colors.white }}>
+          <MyInput textColor={colors.primary} colorIcon={colors.primary} label="Username" onChangeText={val => setKirim({
             ...kirim,
             username: val
           })}
             iconname="at" placeholder="Masukan username" />
           <MyGap jarak={20} />
-          <MyInput textColor={colors.white} colorIcon={colors.white}
+          <MyInput textColor={colors.primary} colorIcon={colors.primary}
             onChangeText={val => setKirim({
               ...kirim,
               password: val
@@ -124,8 +124,6 @@ export default function Login({ navigation }) {
               onPress={masuk}
               title="Log in"
               warna={colors.primary}
-              borderSize={1}
-              borderColor={colors.white}
               Icons="log-in-outline"
             />
 
@@ -141,21 +139,6 @@ export default function Login({ navigation }) {
         </View>}
       </ScrollView>
 
-      <TouchableOpacity activeOpacity={1} onPress={() => {
-
-        navigation.navigate('Register')
-      }} style={{
-        padding: 10,
-        backgroundColor: colors.primary,
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}><Text style={{
-        fontSize: windowWidth / 28,
-        marginTop: 10,
-        fontFamily: fonts.primary[600],
-        textAlign: 'center',
-        color: colors.white
-      }}>TIdak punya akun ? daftar disini</Text></TouchableOpacity>
     </>
   );
 }

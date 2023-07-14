@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     StyleSheet,
     Text,
@@ -10,6 +10,7 @@ import {
     Dimensions,
     Switch,
     SafeAreaView,
+    TouchableOpacity,
     ActivityIndicator,
     Alert,
 } from 'react-native';
@@ -19,6 +20,9 @@ import { MyInput, MyGap, MyButton, MyPicker } from '../../components';
 import axios from 'axios';
 import { showMessage } from 'react-native-flash-message';
 import { apiURL, api_token, MYAPP } from '../../utils/localStorage';
+import DatePicker from 'react-native-datepicker'
+import moment from 'moment';
+import { Icon } from 'react-native-elements';
 
 export default function Register({ navigation }) {
     const windowWidth = Dimensions.get('window').width;
@@ -26,6 +30,7 @@ export default function Register({ navigation }) {
     const [loading, setLoading] = useState(false);
     const [valid, setValid] = useState(false);
     const [isEnabled, setIsEnabled] = useState(false);
+    const [cek, setCek] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
     const validate = text => {
@@ -43,47 +48,52 @@ export default function Register({ navigation }) {
         }
     };
 
+    const [sama, setSama] = useState(true)
+
     const [data, setData] = useState({
         api_token: api_token,
+        username: '',
         password: '',
-        email: '',
-        nama_lengkap: '',
-        nik: '',
+        repassword: '',
         telepon: '',
+        nama_lengkap: '',
+        alamat: '',
     });
 
     const simpan = () => {
         if (
             data.nama_lengkap.length === 0 &&
+            data.username.length === 0 &&
             data.telepon.length === 0 &&
-            data.nik.length === 0 &&
-            data.email.length === 0 &&
             data.password.length === 0
 
         ) {
             showMessage({
-                message: 'Maaf Semua Field Harus Di isi !',
+                message: 'Formulir pendaftaran tidak boleh kosong !',
             });
         } else if (data.nama_lengkap.length === 0) {
             showMessage({
-                message: 'Maaf nama lengkap masih kosong !',
+                message: 'Masukan nama kamu',
             });
         }
+
         else if (data.telepon.length === 0) {
             showMessage({
-                message: 'Maaf telepon masih kosong !',
+                message: 'Masukan nomor telepon',
             });
-        } else if (data.nik.length === 0) {
+        } else if (data.username.length === 0) {
             showMessage({
-                message: 'Maaf nik masih kosong !',
+                message: 'Masukan username',
             });
         } else if (data.password.length === 0) {
             showMessage({
-                message: 'Maaf Password masih kosong !',
+                message: 'Masukan kata sandi kamu',
             });
         } else {
-            setLoading(true);
+
             console.log(data);
+
+            setLoading(true);
             axios
                 .post(apiURL + 'register', data)
                 .then(res => {
@@ -103,79 +113,170 @@ export default function Register({ navigation }) {
                 });
         }
     };
+
+    const [desa, setDesa] = useState([]);
+
+
+
     return (
         <ImageBackground
             style={{
                 flex: 1,
                 backgroundColor: colors.white,
                 padding: 10,
+                position: 'relative'
             }}>
 
             {/* <Switch onValueChange={toggleSwitch} value={isEnabled} /> */}
             <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
-                <Text style={{
-                    textAlign: 'center',
-                    fontFamily: fonts.secondary[600],
-                    fontSize: windowWidth / 20,
-                    marginBottom: 10,
-                }}>Petunjuk Penggunaan</Text>
 
                 <View style={{
-                    flexDirection: 'row',
-                    marginVertical: 5
+                    justifyContent: 'center',
+                    alignItems: 'center'
                 }}>
                     <Text style={{
-                        fontFamily: fonts.secondary[400],
-                        fontSize: windowWidth / 28,
-                    }}>1. </Text>
-                    <Text style={{
-                        fontFamily: fonts.secondary[400],
-                        fontSize: windowWidth / 28,
-                    }}>Selesaikan game puzzle dengan benar</Text>
-                </View>
-                <View style={{
-                    flexDirection: 'row',
-                    marginVertical: 5
-                }}>
-                    <Text style={{
-                        fontFamily: fonts.secondary[400],
-                        fontSize: windowWidth / 28,
-                    }}>2. </Text>
-                    <Text style={{
-                        fontFamily: fonts.secondary[400],
-                        fontSize: windowWidth / 28,
-                    }}>Kalau belum bisa menyelesaikan puzzle..maka belum bisa mengerjakan soaal make and match</Text>
-                </View>
-                <View style={{
-                    flexDirection: 'row',
-                    marginVertical: 5
-                }}>
-                    <Text style={{
-                        fontFamily: fonts.secondary[400],
-                        fontSize: windowWidth / 28,
-                    }}>3. </Text>
-                    <Text style={{
-                        fontFamily: fonts.secondary[400],
-                        fontSize: windowWidth / 28,
-                    }}>Lanjut menjawab soal dengan benar dengan menghubungkan simbol dan sila pancasila.                    </Text>
-                </View>
-                <View style={{
-                    flexDirection: 'row',
-                    marginVertical: 5
-                }}>
-                    <Text style={{
-                        fontFamily: fonts.secondary[400],
-                        fontSize: windowWidth / 28,
-                    }}>4. </Text>
-                    <Text style={{
-                        fontFamily: fonts.secondary[400],
-                        fontSize: windowWidth / 28,
-                    }}>Skormu akan ditampilkan di akhir</Text>
+                        fontSize: windowWidth / 12,
+                        fontFamily: fonts.primary[800],
+                        color: colors.black,
+
+                    }}>Daftar Pengguna</Text>
                 </View>
 
 
+                <MyInput
+                    placeholder="Masukan username"
+                    label="Username"
+                    iconname="at"
+                    value={data.username}
+                    onChangeText={value =>
+                        setData({
+                            ...data,
+                            username: value,
+                        })
+                    }
+                />
+                <MyGap jarak={10} />
+                <MyInput
+                    placeholder="Masukan nama lengkap"
+                    label="Nama Lengkap"
+                    iconname="person"
+                    value={data.nama_lengkap}
+                    onChangeText={value =>
+                        setData({
+                            ...data,
+                            nama_lengkap: value,
+                        })
+                    }
+                />
 
 
+                <MyGap jarak={10} />
+                <MyInput
+                    placeholder="Masukan telepon"
+                    label="Telepon"
+                    iconname="call"
+                    keyboardType="phone-pad"
+                    value={data.telepon}
+                    onChangeText={value =>
+                        setData({
+                            ...data,
+                            telepon: value,
+                        })
+                    }
+                />
+
+                <MyGap jarak={10} />
+                <MyInput
+                    placeholder="Masukan alamat"
+                    label="Alamat"
+                    iconname="location"
+                    value={data.alamat}
+                    onChangeText={value =>
+                        setData({
+                            ...data,
+                            alamat: value,
+                        })
+                    }
+                />
+
+
+
+
+
+
+                <MyGap jarak={10} />
+                <MyInput
+                    placeholder="Masukan buat sandi"
+                    label="Buat Sandi"
+                    iconname="lock-closed"
+                    secureTextEntry
+                    value={data.password}
+                    onChangeText={value =>
+                        setData({
+                            ...data,
+                            password: value,
+                        })
+                    }
+                />
+                <MyGap jarak={10} />
+                <MyInput
+                    borderColor={sama ? colors.border : colors.danger}
+                    borderWidth={sama ? 0 : 1}
+                    placeholder="Masukan ulang kata sandi"
+                    label="Tulis Ulang Kata Sandi"
+                    iconname="lock-closed"
+                    secureTextEntry
+                    value={data.repassword}
+                    onChangeText={value => {
+
+                        if (value !== data.password) {
+                            setSama(false)
+                        } else {
+                            setSama(true)
+                        }
+
+                        setData({
+                            ...data,
+                            repassword: value,
+                        })
+                    }
+
+                    }
+                />
+                <MyGap jarak={20} />
+
+
+
+
+                {!loading &&
+                    <>
+                        <MyButton
+
+                            warna={colors.primary}
+                            title="Buat Akun"
+                            Icons="log-in"
+                            onPress={simpan}
+                        />
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={{
+                            padding: 10,
+                            marginTop: 10,
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}><Text style={{
+                            fontSize: windowWidth / 28,
+                            fontFamily: fonts.primary[400],
+                            textAlign: 'center',
+                            color: colors.primary
+                        }}>Sudah punya akun ? <Text style={{
+                            fontSize: windowWidth / 28,
+                            fontFamily: fonts.primary[600],
+                            textAlign: 'center',
+                            color: colors.primary
+                        }}>Masuk sekarang</Text></Text></TouchableOpacity>
+                    </>
+                }
+
+                <MyGap jarak={10} />
                 {loading && <View style={{
                     flex: 1,
                     justifyContent: 'center',

@@ -20,34 +20,36 @@ import CountDown from 'react-native-countdown-component';
 
 export default function Home({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [user, setUser] = useState({});
   const [modalVisible2, setModalVisible2] = useState(false);
   const [modalVisible3, setModalVisible3] = useState(false);
   const data = [
-    { text: "APPLE", image: require('../../assets/i1.png'), },
+    // { text: "APPLE", image: require('../../assets/i1.png'), },
     { text: "BALL", image: require('../../assets/i2.png') },
-    { text: "CAT", image: require('../../assets/i3.png') },
-    { text: "DOG", image: require('../../assets/i4.png') },
-    { text: "ELEPHANT", image: require('../../assets/i5.png') },
-    { text: "FISH", image: require('../../assets/i6.png') },
-    { text: "GIRAFFE", image: require('../../assets/i7.png') },
-    { text: "HAT", image: require('../../assets/i8.png') },
-    { text: "LION", image: require('../../assets/i9.png') },
-    { text: "MONKEY", image: require('../../assets/i10.png') },
-    { text: "HEAD", image: require('../../assets/i11.png') },
-    { text: "HAIR", image: require('../../assets/i12.png') },
-    { text: "EYE", image: require('../../assets/i13.png') },
-    { text: "EAR", image: require('../../assets/i14.png') },
-    { text: "NOSE", image: require('../../assets/i15.png') },
-    { text: "MOUTH", image: require('../../assets/i16.png') },
-    { text: "TOOTH", image: require('../../assets/i17.png') },
-    { text: "TONGUE", image: require('../../assets/i18.png') },
-    { text: "FACE", image: require('../../assets/i19.png') },
-    { text: "HAND", image: require('../../assets/i20.png') },
+    // { text: "CAT", image: require('../../assets/i3.png') },
+    // { text: "DOG", image: require('../../assets/i4.png') },
+    // { text: "ELEPHANT", image: require('../../assets/i5.png') },
+    // { text: "FISH", image: require('../../assets/i6.png') },
+    // { text: "GIRAFFE", image: require('../../assets/i7.png') },
+    // { text: "HAT", image: require('../../assets/i8.png') },
+    // { text: "LION", image: require('../../assets/i9.png') },
+    // { text: "MONKEY", image: require('../../assets/i10.png') },
+    // { text: "HEAD", image: require('../../assets/i11.png') },
+    // { text: "HAIR", image: require('../../assets/i12.png') },
+    // { text: "EYE", image: require('../../assets/i13.png') },
+    // { text: "EAR", image: require('../../assets/i14.png') },
+    // { text: "NOSE", image: require('../../assets/i15.png') },
+    // { text: "MOUTH", image: require('../../assets/i16.png') },
+    // { text: "TOOTH", image: require('../../assets/i17.png') },
+    // { text: "TONGUE", image: require('../../assets/i18.png') },
+    // { text: "FACE", image: require('../../assets/i19.png') },
+    // { text: "HAND", image: require('../../assets/i20.png') },
   ]
 
   const [nomor, setNomor] = useState(0);
 
   const [nilai, setNilai] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  // const [nilai, setNilai] = useState([0])
 
   const [tmp, setTemp] = useState([]);
   const [waktu, setWaktu] = useState(3600);
@@ -79,7 +81,9 @@ export default function Home({ navigation }) {
   }
 
   useEffect(() => {
-
+    getData('user').then(uu => {
+      setUser(uu)
+    })
     getRandom(0, data[nomor].text.split("").length - 1, data[nomor].text.split("").length);
 
   }, []);
@@ -88,8 +92,15 @@ export default function Home({ navigation }) {
 
   const lanjut = () => {
 
-    if (nomor == 19) {
+    if (nomor == (data.length - 1)) {
 
+      let NILAI = nilai.reduce((partialSum, a) => partialSum + a, 0);
+      axios.post(apiURL + 'nilai_add', {
+        nilai: NILAI,
+        fid_user: user.id
+      }).then(res => {
+        console.log(res.data)
+      })
       setModalVisible3(true);
     } else {
       setWaktu(180)
@@ -103,10 +114,12 @@ export default function Home({ navigation }) {
 
   const sendServer = () => {
 
+
+
     if (pilih.join("") == data[nomor].text) {
       setModalVisible(true);
-
       let tmp = nilai;
+      console.log(nilai)
       tmp[nomor] = 5,
         setNilai(tmp);
 
@@ -114,6 +127,7 @@ export default function Home({ navigation }) {
 
     } else {
       setModalVisible2(true);
+
     }
   }
 
@@ -168,12 +182,24 @@ export default function Home({ navigation }) {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-          <TouchableOpacity onPress={() => navigation.goBack()} style={{
+          <TouchableOpacity onPress={() => navigation.replace('Mulai')} style={{
             padding: 10,
             // backgroundColor: colors.primary,
             borderRadius: 5,
           }}>
             <Icon type='ionicon' name='home' color={colors.primary} />
+          </TouchableOpacity>
+        </View>
+        <View style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <TouchableOpacity onPress={() => navigation.navigate('Account')} style={{
+            padding: 10,
+            // backgroundColor: colors.primary,
+            borderRadius: 5,
+          }}>
+            <Icon type='ionicon' name='person' color={colors.primary} />
           </TouchableOpacity>
         </View>
       </View>
@@ -298,7 +324,7 @@ export default function Home({ navigation }) {
           pilih.length >= data[nomor].text.split("").length && <TouchableOpacity
             onPress={sendServer}
             style={{
-              backgroundColor: nomor == 19 ? colors.success : colors.primary,
+              backgroundColor: nomor == (data.length - 1) ? colors.success : colors.primary,
               height: 50,
               justifyContent: 'center',
               alignItems: 'center'
@@ -307,7 +333,7 @@ export default function Home({ navigation }) {
               fontFamily: fonts.secondary[600],
               color: colors.white,
               textAlign: 'center'
-            }}>{nomor == 19 ? 'FINISH' : 'NEXT'}</Text>
+            }}>{nomor == (data.length - 1) ? 'FINISH' : 'NEXT'}</Text>
           </TouchableOpacity>
         }
       </View>
@@ -415,7 +441,7 @@ export default function Home({ navigation }) {
         transparent={true}
         visible={modalVisible3}
         onRequestClose={() => {
-          navigation.replace('Login');
+          navigation.replace('Mulai');
           setModalVisible3(!modalVisible3);
         }}>
         <View style={{
@@ -450,7 +476,7 @@ export default function Home({ navigation }) {
             }}>{nilai.reduce((partialSum, a) => partialSum + a, 0)}</Text>
             <Pressable onPress={() => {
               setModalVisible3(!modalVisible3);
-              navigation.replace('Login');
+              navigation.replace('Mulai');
             }} style={{
               backgroundColor: colors.primary,
               width: 80,

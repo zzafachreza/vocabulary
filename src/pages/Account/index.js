@@ -55,7 +55,10 @@ export default function ({ navigation, route }) {
                 onPress: () => {
                     storeData('user', null);
 
-                    navigation.replace('Login');
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: 'Splash' }],
+                    });
                 }
             }
         ])
@@ -73,15 +76,15 @@ export default function ({ navigation, route }) {
                 <Text
                     style={{
                         fontFamily: fonts.secondary[600],
-                        fontSize: windowWidth / 20,
+                        fontSize: 16,
                         color: colors.black,
                     }}>
                     {label}
                 </Text>
                 <Text
                     style={{
-                        fontFamily: fonts.secondary[400],
-                        fontSize: windowWidth / 20,
+                        fontFamily: fonts.secondary[600],
+                        fontSize: 16,
                         color: colors.primary,
                     }}>
                     {value}
@@ -92,7 +95,8 @@ export default function ({ navigation, route }) {
     return (
         <SafeAreaView style={{
             flex: 1,
-            padding: 10
+            padding: 10,
+            backgroundColor: colors.primary
         }}>
 
             {!open && <View style={{
@@ -108,10 +112,10 @@ export default function ({ navigation, route }) {
 
                 {/* data detail */}
                 <View style={{ padding: 10, flex: 1 }}>
-                    <MyList label="Nama" value={user.nama} />
-                    <MyList label="Absen" value={user.absen} />
-                    <MyList label="Kelas" value={user.kelas} />
-                    <MyList label="Sekolah" value={user.sekolah} />
+                    <MyList label="Username" value={user.username} />
+                    <MyList label="Nama Lengkap" value={user.nama_lengkap} />
+                    <MyList label="Telepon" value={user.telepon} />
+                    <MyList label="Alamat" value={user.alamat} />
                 </View>
                 <View style={{ padding: 10, flexDirection: 'row', justifyContent: 'space-around' }}>
 
