@@ -47,43 +47,77 @@ export default function HomeGuru({ navigation }) {
                 borderRadius: 10,
                 padding: 10,
                 borderWidth: 1,
+                flexDirection: 'row'
             }}>
-                <View>
-                    <Text style={{
-                        fontFamily: fonts.secondary[600],
-                        fontSize: 14,
-                        color: colors.black
-                    }}>Date</Text>
-                    <Text style={{
-                        fontFamily: fonts.secondary[600],
-                        fontSize: 14,
-                        color: colors.primary
-                    }}>{moment(item.tanggal).format('dddd, MMMM DD YYYY')}</Text>
+                <View style={{
+                    flex: 1,
+                }}>
+                    <View style={{
+
+                    }}>
+                        <Text style={{
+                            fontFamily: fonts.secondary[600],
+                            fontSize: 14,
+                            color: colors.black
+                        }}>Date</Text>
+                        <Text style={{
+                            fontFamily: fonts.secondary[600],
+                            fontSize: 14,
+                            color: colors.primary
+                        }}>{moment(item.tanggal).format('dddd, MMMM DD YYYY')}</Text>
+                    </View>
+                    <View>
+                        <Text style={{
+                            fontFamily: fonts.secondary[600],
+                            fontSize: 14,
+                            color: colors.black
+                        }}>Name</Text>
+                        <Text style={{
+                            fontFamily: fonts.secondary[600],
+                            fontSize: 14,
+                            color: colors.primary
+                        }}>{item.nama_lengkap}</Text>
+                    </View>
+                    <View>
+                        <Text style={{
+                            fontFamily: fonts.secondary[600],
+                            fontSize: 14,
+                            color: colors.black
+                        }}>Skor</Text>
+                        <Text style={{
+                            fontFamily: fonts.secondary[800],
+                            fontSize: 20,
+                            color: colors.black
+                        }}>{item.nilai}</Text>
+                    </View>
                 </View>
-                <View>
-                    <Text style={{
-                        fontFamily: fonts.secondary[600],
-                        fontSize: 14,
-                        color: colors.black
-                    }}>Name</Text>
-                    <Text style={{
-                        fontFamily: fonts.secondary[600],
-                        fontSize: 14,
-                        color: colors.primary
-                    }}>{item.nama_lengkap}</Text>
-                </View>
-                <View>
-                    <Text style={{
-                        fontFamily: fonts.secondary[600],
-                        fontSize: 14,
-                        color: colors.black
-                    }}>Skor</Text>
-                    <Text style={{
-                        fontFamily: fonts.secondary[800],
-                        fontSize: 20,
-                        color: colors.black
-                    }}>{item.nilai}</Text>
-                </View>
+                <TouchableOpacity onPress={() => Alert.alert(MYAPP, 'Apakah kamu mau hapus ini ?', [
+                    {
+                        text: 'TIDAK'
+                    },
+                    {
+                        text: 'HAPUS',
+                        onPress: () => {
+                            axios.post(apiURL + 'nilai_hapus', {
+                                id: item.id
+                            }).then(res => {
+                                console.log(res.data);
+                                showMessage({
+                                    type: 'success',
+                                    message: 'Hapus berhasil !'
+                                })
+                                __getTransaction();
+                            })
+                        }
+                    }
+                ])} style={{
+                    flex: 1,
+
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Icon type='ionicon' name='trash' color={colors.danger} />
+                </TouchableOpacity>
             </View>
         )
     }

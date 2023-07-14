@@ -7,16 +7,11 @@ import { apiURL, api_token, MYAPP, storeData } from '../../utils/localStorage';
 import { showMessage } from 'react-native-flash-message';
 import { ImageBackground } from 'react-native';
 import Sound from 'react-native-sound';
-var whoosh = new Sound(
-    require('../../assets/suara.mp3'),
-    Sound.MAIN_BUNDLE,
-).release();
+
 
 export default function Mulai({ navigation }) {
 
-    useEffect(() => {
-        whoosh.play();
-    }, [])
+
 
     return (
         <ImageBackground style={{
