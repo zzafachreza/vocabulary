@@ -16,7 +16,7 @@ export default function Mulai({ navigation }) {
     return (
         <ImageBackground style={{
             flex: 1,
-            backgroundColor: colors.white
+            backgroundColor: colors.whitecd
         }} source={require('../../assets/mulai.png')}>
             <View style={{
                 flex: 0.8,
@@ -36,7 +36,7 @@ export default function Mulai({ navigation }) {
                         fontFamily: fonts.secondary[600],
                         fontSize: 30,
                         color: colors.white
-                    }}>PLAY</Text>
+                    }}>MULAI</Text>
                 </TouchableOpacity>
             </View>
         </ImageBackground>

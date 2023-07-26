@@ -10,17 +10,11 @@ import {
 import { MyButton } from '../../components';
 import { colors, fonts, windowHeight, windowWidth } from '../../utils';
 import { getData } from '../../utils/localStorage';
-import Sound from 'react-native-sound';
-var whoosh = new Sound(
-  require('../../assets/suara.mp3'),
-  Sound.MAIN_BUNDLE,
-).release();
+
 
 export default function Splash({ navigation }) {
 
-  useEffect(() => {
-    whoosh.play();
-  }, [])
+
   const top = new Animated.Value(0.3);
 
   const animasi = () => {

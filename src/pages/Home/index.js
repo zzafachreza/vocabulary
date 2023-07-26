@@ -210,6 +210,10 @@ export default function Home({ navigation }) {
         justifyContent: 'center',
         alignItems: 'center'
       }}>
+        <Text style={{
+          fontFamily: fonts.secondary[800],
+          fontSize: 25,
+        }}>Apakah aku?</Text>
         <Image source={data[nomor].image} style={{
 
           width: windowWidth / 1.5,
@@ -311,7 +315,8 @@ export default function Home({ navigation }) {
           paddingHorizontal: windowWidth / 3,
 
         }}>
-          <MyButton onPress={() => setPilih([])} tinggi={40} title="RESET" Icons="refresh" warna={colors.border} />
+          {nomor != (data.length - 1) && pilih.length >= data[nomor].text.split("").length && <MyButton onPress={sendServer} tinggi={40} title="SELANJUTNYA" Icons="chevron-forward-circle" warna={colors.primary} />}
+
         </View>
 
 
@@ -322,9 +327,15 @@ export default function Home({ navigation }) {
       }}>
         {
           pilih.length >= data[nomor].text.split("").length && <TouchableOpacity
-            onPress={sendServer}
+            onPress={() => {
+              if (nomor == (data.length - 1)) {
+                sendServer();
+              } else {
+                setPilih([])
+              }
+            }}
             style={{
-              backgroundColor: nomor == (data.length - 1) ? colors.success : colors.primary,
+              backgroundColor: nomor == (data.length - 1) ? colors.success : colors.border,
               height: 50,
               justifyContent: 'center',
               alignItems: 'center'
@@ -333,7 +344,7 @@ export default function Home({ navigation }) {
               fontFamily: fonts.secondary[600],
               color: colors.white,
               textAlign: 'center'
-            }}>{nomor == (data.length - 1) ? 'FINISH' : 'NEXT'}</Text>
+            }}>{nomor == (data.length - 1) ? 'SELESAI' : 'ULANG'}</Text>
           </TouchableOpacity>
         }
       </View>
@@ -468,7 +479,7 @@ export default function Home({ navigation }) {
             <Text style={{
               fontFamily: fonts.secondary[400],
               fontSize: 30,
-            }}>SCORE</Text>
+            }}>NILAI</Text>
             <Text style={{
               marginVertical: 10,
               fontFamily: fonts.secondary[600],

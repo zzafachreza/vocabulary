@@ -5,9 +5,18 @@ import { MyInput, MyGap, MyButton } from '../../components';
 import axios from 'axios';
 import { apiURL, api_token, MYAPP, storeData } from '../../utils/localStorage';
 import { showMessage } from 'react-native-flash-message';
-
+import Sound from 'react-native-sound';
+var whoosh = new Sound(
+  require('../../assets/suara.mp3'),
+  Sound.MAIN_BUNDLE,
+).release();
 
 export default function Login({ navigation }) {
+
+
+  useEffect(() => {
+    whoosh.play();
+  }, [])
 
   const [kirim, setKirim] = useState({
     api_token: api_token,
