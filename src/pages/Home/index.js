@@ -230,7 +230,7 @@ export default function Home({ navigation }) {
 
         <View style={{
           flexDirection: 'row',
-          justifyContent: 'space-between'
+          justifyContent: 'space-around'
         }}>
 
           {data[nomor].text.split("").map((i, index) => {
@@ -241,24 +241,22 @@ export default function Home({ navigation }) {
             return (
               <View style={{
                 backgroundColor: colors.white,
-                flex: 1,
+                padding: 5,
+                width: windowWidth / (data[nomor].text.split("").length + 2),
                 borderWidth: 1,
-                borderColor: colors.black,
                 borderStyle: 'dashed',
-                margin: 5,
+                height: 50,
                 borderRadius: 5,
+                justifyContent: 'center',
+                alignItems: 'center'
               }}>
-                <View style={{
-                  padding: 10,
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}>
-                  <Text style={{
-                    fontFamily: fonts.secondary[600],
-                    color: colors.black,
-                    fontSize: 20,
-                  }}>{pilih[index]} </Text>
-                </View>
+
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  color: colors.black,
+                  fontSize: ((windowWidth * windowHeight) / 1000) / 16,
+                }}>{pilih[index]} </Text>
+
               </View>
             )
           })}
@@ -271,37 +269,39 @@ export default function Home({ navigation }) {
 
         {/* acak number */}
         <View style={{
+          marginTop: 10,
           flexDirection: 'row',
-          justifyContent: 'space-between'
+          justifyContent: 'space-around'
         }}>
 
           {data[nomor].text.split("").map((i, index) => {
 
 
             return (
-              <View style={{
+
+              <TouchableOpacity onPress={() => {
+                console.log(pilih.length)
+
+                setPilih([...pilih, data[nomor].text.split("")[tmp[index]]])
+
+              }} style={{
+                padding: 5,
+                width: windowWidth / (data[nomor].text.split("").length + 2),
                 backgroundColor: colors.primary,
-                flex: 1,
-                margin: 5,
+                height: 50,
                 borderRadius: 5,
+                borderWidth: 1,
+                borderColor: colors.primary,
+                justifyContent: 'center',
+                alignItems: 'center'
               }}>
-                <TouchableOpacity onPress={() => {
-                  console.log(pilih.length)
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  color: colors.white,
+                  fontSize: ((windowWidth * windowHeight) / 1000) / 16,
+                }}>{data[nomor].text.split("")[tmp[index]]} </Text>
+              </TouchableOpacity>
 
-                  setPilih([...pilih, data[nomor].text.split("")[tmp[index]]])
-
-                }} style={{
-                  padding: 10,
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}>
-                  <Text style={{
-                    fontFamily: fonts.secondary[600],
-                    color: colors.white,
-                    fontSize: 20,
-                  }}>{data[nomor].text.split("")[tmp[index]]} </Text>
-                </TouchableOpacity>
-              </View>
             )
           })}
 
@@ -311,11 +311,29 @@ export default function Home({ navigation }) {
         </View>
 
         <View style={{
-          marginTop: 10,
-          paddingHorizontal: windowWidth / 3,
+          marginTop: 15,
+          alignItems: 'center'
 
         }}>
-          {nomor != (data.length - 1) && pilih.length >= data[nomor].text.split("").length && <MyButton onPress={sendServer} tinggi={40} title="SELANJUTNYA" Icons="chevron-forward-circle" warna={colors.primary} />}
+          {/* <MyButton onPress={sendServer} tinggi={40} title="SELANJUTNYA" Icons="chevron-forward-circle" warna={colors.primary} /> */}
+          {nomor != (data.length - 1) && pilih.length >= data[nomor].text.split("").length &&
+            <TouchableOpacity onPress={sendServer} style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              backgroundColor: colors.primary,
+              height: 40,
+              width: windowWidth / 2.5,
+              justifyContent: 'center',
+              borderRadius: 10,
+            }}>
+              <Icon type='ionicon' color={colors.white} size={13} name='chevron-forward-circle' />
+              <Text style={{
+                left: 5,
+                fontSize: 13,
+                color: colors.white,
+                fontFamily: fonts.secondary[600]
+              }}>SELANJUTNYA</Text>
+            </TouchableOpacity>}
 
         </View>
 
