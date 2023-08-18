@@ -23,28 +23,46 @@ export default function Home({ navigation }) {
   const [user, setUser] = useState({});
   const [modalVisible2, setModalVisible2] = useState(false);
   const [modalVisible3, setModalVisible3] = useState(false);
-  const data = [
-    { text: "APPLE", image: require('../../assets/i1.png'), },
-    { text: "BALL", image: require('../../assets/i2.png') },
-    { text: "CAT", image: require('../../assets/i3.png') },
-    { text: "DOG", image: require('../../assets/i4.png') },
-    { text: "ELEPHANT", image: require('../../assets/i5.png') },
-    { text: "FISH", image: require('../../assets/i6.png') },
-    { text: "GIRAFFE", image: require('../../assets/i7.png') },
-    { text: "HAT", image: require('../../assets/i8.png') },
-    { text: "LION", image: require('../../assets/i9.png') },
-    { text: "MONKEY", image: require('../../assets/i10.png') },
-    { text: "HEAD", image: require('../../assets/i11.png') },
-    { text: "HAIR", image: require('../../assets/i12.png') },
-    { text: "EYE", image: require('../../assets/i13.png') },
-    { text: "EAR", image: require('../../assets/i14.png') },
-    { text: "NOSE", image: require('../../assets/i15.png') },
-    { text: "MOUTH", image: require('../../assets/i16.png') },
-    { text: "TOOTH", image: require('../../assets/i17.png') },
-    { text: "TONGUE", image: require('../../assets/i18.png') },
-    { text: "FACE", image: require('../../assets/i19.png') },
-    { text: "HAND", image: require('../../assets/i20.png') },
-  ]
+
+  const shuffle = (array) => {
+    let currentIndex = array.length, randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
+
+  const [loading, setLoading] = useState(true);
+  const getBlockData = async () => {
+    const response = await fetch(`${apiURL}random_soal`).then((response) => response.json());
+    console.log(response);
+    setData(response);
+    setLoading(false)
+    getRandom(0, response[0].text.split("").length - 1, response[0].text.split("").length);
+  };
+
+
+
+  const [data, setData] = useState([]);
+
+  // const RandomArray = new Promise((myResolve, myReject) => {
+  //   // "Producing Code" (May take some time)
+  //   // shuffle(data);
+  //   myResolve(shuffle(data))
+  // });
+
+
+
 
   const [nomor, setNomor] = useState(0);
 
@@ -54,6 +72,9 @@ export default function Home({ navigation }) {
   const [tmp, setTemp] = useState([]);
   const [waktu, setWaktu] = useState(3600);
 
+  const cekPromis = () => {
+
+  }
 
   const getRandom = (start, end, total) => {
     // Tentukan rentang angka dan jumlah angka yang diinginkan
@@ -83,8 +104,15 @@ export default function Home({ navigation }) {
   useEffect(() => {
     getData('user').then(uu => {
       setUser(uu)
-    })
-    getRandom(0, data[nomor].text.split("").length - 1, data[nomor].text.split("").length);
+    });
+
+
+
+    getBlockData();
+
+
+
+
 
   }, []);
 
@@ -140,387 +168,392 @@ export default function Home({ navigation }) {
       flex: 1,
       backgroundColor: colors.white,
     }}>
-      <View style={{
-        flex: 0.2,
-        paddingHorizontal: 10,
-        flexDirection: 'row'
-      }}>
+      {!loading && <>
+
         <View style={{
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}>
-          <CountDown
-            until={waktu}
-            size={15}
-            onFinish={sendServer}
-            digitStyle={{ backgroundColor: colors.primary }}
-            digitTxtStyle={{ color: colors.white }}
-            timeToShow={['M', 'S']}
-            timeLabels={{ m: '', s: '' }}
-          />
-        </View>
-        <View style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center'
+          flex: 0.2,
+          paddingHorizontal: 10,
+          flexDirection: 'row'
         }}>
           <View style={{
-            width: 80,
-            padding: 10,
-            backgroundColor: colors.primary,
-            borderRadius: 5,
+            justifyContent: 'center',
+            alignItems: 'center'
           }}>
-            <Text style={{
-              textAlign: 'center',
-              fontFamily: fonts.secondary[600],
-              color: colors.white
-            }}>{nomor + 1}/20</Text>
+            <CountDown
+              until={waktu}
+              size={15}
+              onFinish={sendServer}
+              digitStyle={{ backgroundColor: colors.primary }}
+              digitTxtStyle={{ color: colors.white }}
+              timeToShow={['M', 'S']}
+              timeLabels={{ m: '', s: '' }}
+            />
+          </View>
+          <View style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <View style={{
+              width: 80,
+              padding: 10,
+              backgroundColor: colors.primary,
+              borderRadius: 5,
+            }}>
+              <Text style={{
+                textAlign: 'center',
+                fontFamily: fonts.secondary[600],
+                color: colors.white
+              }}>{nomor + 1}/20</Text>
+            </View>
+          </View>
+
+          <View style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+            <TouchableOpacity onPress={() => navigation.replace('Mulai')} style={{
+              padding: 10,
+              // backgroundColor: colors.primary,
+              borderRadius: 5,
+            }}>
+              <Icon type='ionicon' name='home' color={colors.primary} />
+            </TouchableOpacity>
+          </View>
+          <View style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+            <TouchableOpacity onPress={() => navigation.navigate('Account')} style={{
+              padding: 10,
+              // backgroundColor: colors.primary,
+              borderRadius: 5,
+            }}>
+              <Icon type='ionicon' name='person' color={colors.primary} />
+            </TouchableOpacity>
           </View>
         </View>
 
         <View style={{
+          flex: 1,
+          padding: 10,
           justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-          <TouchableOpacity onPress={() => navigation.replace('Mulai')} style={{
-            padding: 10,
-            // backgroundColor: colors.primary,
-            borderRadius: 5,
-          }}>
-            <Icon type='ionicon' name='home' color={colors.primary} />
-          </TouchableOpacity>
-        </View>
-        <View style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-          <TouchableOpacity onPress={() => navigation.navigate('Account')} style={{
-            padding: 10,
-            // backgroundColor: colors.primary,
-            borderRadius: 5,
-          }}>
-            <Icon type='ionicon' name='person' color={colors.primary} />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <View style={{
-        flex: 1,
-        padding: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-        <Text style={{
-          fontFamily: fonts.secondary[800],
-          fontSize: 25,
-        }}>Apakah aku?</Text>
-        <Image source={data[nomor].image} style={{
-
-          width: windowWidth / 1.5,
-          height: windowWidth / 1.5,
-          resizeMode: 'contain'
-
-        }} />
-      </View>
-      <View style={{
-        flex: 1,
-        padding: 5,
-      }}>
-
-
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-around'
-        }}>
-
-          {data[nomor].text.split("").map((i, index) => {
-
-
-
-
-            return (
-              <View style={{
-                backgroundColor: colors.white,
-                padding: 5,
-                width: windowWidth / (data[nomor].text.split("").length + 2),
-                borderWidth: 1,
-                borderStyle: 'dashed',
-                height: 50,
-                borderRadius: 5,
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-
-                <Text style={{
-                  fontFamily: fonts.secondary[600],
-                  color: colors.black,
-                  fontSize: ((windowWidth * windowHeight) / 1000) / 16,
-                }}>{pilih[index]} </Text>
-
-              </View>
-            )
-          })}
-
-
-
-
-        </View>
-
-
-        {/* acak number */}
-        <View style={{
-          marginTop: 10,
-          flexDirection: 'row',
-          justifyContent: 'space-around'
-        }}>
-
-          {data[nomor].text.split("").map((i, index) => {
-
-
-            return (
-
-              <TouchableOpacity onPress={() => {
-                console.log(pilih.length)
-
-                setPilih([...pilih, data[nomor].text.split("")[tmp[index]]])
-
-              }} style={{
-                padding: 5,
-                width: windowWidth / (data[nomor].text.split("").length + 2),
-                backgroundColor: colors.primary,
-                height: 50,
-                borderRadius: 5,
-                borderWidth: 1,
-                borderColor: colors.primary,
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <Text style={{
-                  fontFamily: fonts.secondary[600],
-                  color: colors.white,
-                  fontSize: ((windowWidth * windowHeight) / 1000) / 16,
-                }}>{data[nomor].text.split("")[tmp[index]]} </Text>
-              </TouchableOpacity>
-
-            )
-          })}
-
-
-
-
-        </View>
-
-        <View style={{
-          marginTop: 15,
           alignItems: 'center'
-
         }}>
-          {/* <MyButton onPress={sendServer} tinggi={40} title="SELANJUTNYA" Icons="chevron-forward-circle" warna={colors.primary} /> */}
-          {nomor != (data.length - 1) && pilih.length >= data[nomor].text.split("").length &&
-            <TouchableOpacity onPress={sendServer} style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: colors.primary,
-              height: 40,
-              width: windowWidth / 2.5,
-              justifyContent: 'center',
-              borderRadius: 10,
-            }}>
-              <Icon type='ionicon' color={colors.white} size={13} name='chevron-forward-circle' />
-              <Text style={{
-                left: 5,
-                fontSize: 13,
-                color: colors.white,
-                fontFamily: fonts.secondary[600]
-              }}>SELANJUTNYA</Text>
-            </TouchableOpacity>}
+          <Text style={{
+            fontFamily: fonts.secondary[800],
+            fontSize: 25,
+          }}>Apakah aku?</Text>
+          <Image source={{
+            uri: data[nomor].image
+          }} style={{
+
+            width: windowWidth / 1.5,
+            height: windowWidth / 1.5,
+            resizeMode: 'contain'
+
+          }} />
+        </View>
+        <View style={{
+          flex: 1,
+          padding: 5,
+        }}>
+
+
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around'
+          }}>
+
+            {data[nomor].text.split("").map((i, index) => {
+
+
+
+
+              return (
+                <View style={{
+                  backgroundColor: colors.white,
+                  padding: 5,
+                  width: windowWidth / (data[nomor].text.split("").length + 2),
+                  borderWidth: 1,
+                  borderStyle: 'dashed',
+                  height: 50,
+                  borderRadius: 5,
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}>
+
+                  <Text style={{
+                    fontFamily: fonts.secondary[600],
+                    color: colors.black,
+                    fontSize: ((windowWidth * windowHeight) / 1000) / 16,
+                  }}>{pilih[index]} </Text>
+
+                </View>
+              )
+            })}
+
+
+
+
+          </View>
+
+
+          {/* acak number */}
+          <View style={{
+            marginTop: 10,
+            flexDirection: 'row',
+            justifyContent: 'space-around'
+          }}>
+
+            {data[nomor].text.split("").map((i, index) => {
+
+
+              return (
+
+                <TouchableOpacity onPress={() => {
+                  console.log(pilih.length)
+
+                  setPilih([...pilih, data[nomor].text.split("")[tmp[index]]])
+
+                }} style={{
+                  padding: 5,
+                  width: windowWidth / (data[nomor].text.split("").length + 2),
+                  backgroundColor: colors.primary,
+                  height: 50,
+                  borderRadius: 5,
+                  borderWidth: 1,
+                  borderColor: colors.primary,
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}>
+                  <Text style={{
+                    fontFamily: fonts.secondary[600],
+                    color: colors.white,
+                    fontSize: ((windowWidth * windowHeight) / 1000) / 16,
+                  }}>{data[nomor].text.split("")[tmp[index]]} </Text>
+                </TouchableOpacity>
+
+              )
+            })}
+
+
+
+
+          </View>
+
+          <View style={{
+            marginTop: 15,
+            alignItems: 'center'
+
+          }}>
+            {/* <MyButton onPress={sendServer} tinggi={40} title="SELANJUTNYA" Icons="chevron-forward-circle" warna={colors.primary} /> */}
+            {nomor != (data.length - 1) && pilih.length >= data[nomor].text.split("").length &&
+              <TouchableOpacity onPress={sendServer} style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: colors.primary,
+                height: 40,
+                width: windowWidth / 2.5,
+                justifyContent: 'center',
+                borderRadius: 10,
+              }}>
+                <Icon type='ionicon' color={colors.white} size={13} name='chevron-forward-circle' />
+                <Text style={{
+                  left: 5,
+                  fontSize: 13,
+                  color: colors.white,
+                  fontFamily: fonts.secondary[600]
+                }}>SELANJUTNYA</Text>
+              </TouchableOpacity>}
+
+          </View>
+
+
 
         </View>
+        <View style={{
+          height: 50,
+        }}>
+          {
+            pilih.length >= data[nomor].text.split("").length && <TouchableOpacity
+              onPress={() => {
+                if (nomor == (data.length - 1)) {
+                  sendServer();
+                } else {
+                  setPilih([])
+                }
+              }}
+              style={{
+                backgroundColor: nomor == (data.length - 1) ? colors.success : colors.border,
+                height: 50,
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+              <Text style={{
+                fontFamily: fonts.secondary[600],
+                color: colors.white,
+                textAlign: 'center'
+              }}>{nomor == (data.length - 1) ? 'SELESAI' : 'ULANG'}</Text>
+            </TouchableOpacity>
+          }
+        </View>
 
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
 
-
-      </View>
-      <View style={{
-        height: 50,
-      }}>
-        {
-          pilih.length >= data[nomor].text.split("").length && <TouchableOpacity
-            onPress={() => {
-              if (nomor == (data.length - 1)) {
-                sendServer();
-              } else {
-                setPilih([])
-              }
-            }}
-            style={{
-              backgroundColor: nomor == (data.length - 1) ? colors.success : colors.border,
-              height: 50,
+            setModalVisible(!modalVisible);
+            lanjut();
+          }}>
+          <View style={{
+            flex: 1,
+            opacity: 0.8,
+            width: windowWidth,
+            height: windowHeight / 2,
+            backgroundColor: colors.black,
+            justifyContent: 'center',
+            padding: 10,
+          }}>
+            <View style={{
+              backgroundColor: colors.white,
+              height: windowHeight / 2,
+              borderRadius: 10,
               justifyContent: 'center',
               alignItems: 'center'
             }}>
-            <Text style={{
-              fontFamily: fonts.secondary[600],
-              color: colors.white,
-              textAlign: 'center'
-            }}>{nomor == (data.length - 1) ? 'SELESAI' : 'ULANG'}</Text>
-          </TouchableOpacity>
-        }
-      </View>
-
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-
-          setModalVisible(!modalVisible);
-          lanjut();
-        }}>
-        <View style={{
-          flex: 1,
-          opacity: 0.8,
-          width: windowWidth,
-          height: windowHeight / 2,
-          backgroundColor: colors.black,
-          justifyContent: 'center',
-          padding: 10,
-        }}>
-          <View style={{
-            backgroundColor: colors.white,
-            height: windowHeight / 2,
-            borderRadius: 10,
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-            <Image source={require('../../assets/benar.png')} style={{
-              width: '100%',
-              height: windowHeight / 2.7,
-              resizeMode: 'contain'
-            }} />
-            <Pressable onPress={() => {
-              setModalVisible(!modalVisible);
-              lanjut();
-            }} style={{
-              backgroundColor: colors.primary,
-              width: 80,
-              borderRadius: 10,
-              padding: 10,
-            }}>
-              <Text style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: 18,
-                textAlign: 'center',
-              }}>OK</Text>
-            </Pressable>
+              <Image source={require('../../assets/benar.png')} style={{
+                width: '100%',
+                height: windowHeight / 2.7,
+                resizeMode: 'contain'
+              }} />
+              <Pressable onPress={() => {
+                setModalVisible(!modalVisible);
+                lanjut();
+              }} style={{
+                backgroundColor: colors.primary,
+                width: 80,
+                borderRadius: 10,
+                padding: 10,
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: 18,
+                  textAlign: 'center',
+                }}>OK</Text>
+              </Pressable>
+            </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
 
 
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible2}
-        onRequestClose={() => {
-          lanjut();
-          setModalVisible2(!modalVisible2);
-        }}>
-        <View style={{
-          flex: 1,
-          opacity: 0.8,
-          width: windowWidth,
-          height: windowHeight / 2,
-          backgroundColor: colors.black,
-          justifyContent: 'center',
-          padding: 10,
-        }}>
-          <View style={{
-            backgroundColor: colors.white,
-            height: windowHeight / 2,
-            borderRadius: 10,
-            justifyContent: 'center',
-            alignItems: 'center'
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible2}
+          onRequestClose={() => {
+            lanjut();
+            setModalVisible2(!modalVisible2);
           }}>
-            <Image source={require('../../assets/salah.png')} style={{
-              width: '100%',
-              height: windowHeight / 2.7,
-              resizeMode: 'contain'
-            }} />
-            <Pressable onPress={() => {
-              setModalVisible2(!modalVisible2);
-              lanjut();
-            }} style={{
-              backgroundColor: colors.primary,
-              width: 80,
-              borderRadius: 10,
-              padding: 10,
-            }}>
-              <Text style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: 18,
-                textAlign: 'center',
-              }}>OK</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible3}
-        onRequestClose={() => {
-          navigation.replace('Mulai');
-          setModalVisible3(!modalVisible3);
-        }}>
-        <View style={{
-          flex: 1,
-          opacity: 0.8,
-          width: windowWidth,
-          height: windowHeight / 2,
-          backgroundColor: colors.black,
-          justifyContent: 'center',
-          padding: 10,
-        }}>
           <View style={{
-            backgroundColor: colors.white,
+            flex: 1,
+            opacity: 0.8,
+            width: windowWidth,
             height: windowHeight / 2,
-            borderRadius: 10,
+            backgroundColor: colors.black,
             justifyContent: 'center',
-            alignItems: 'center'
+            padding: 10,
           }}>
-            <Image source={require('../../assets/skor.png')} style={{
-              width: '100%',
-              height: windowHeight / 4,
-              resizeMode: 'contain'
-            }} />
-            <Text style={{
-              fontFamily: fonts.secondary[400],
-              fontSize: 30,
-            }}>NILAI</Text>
-            <Text style={{
-              marginVertical: 10,
-              fontFamily: fonts.secondary[600],
-              fontSize: 50,
-            }}>{nilai.reduce((partialSum, a) => partialSum + a, 0)}</Text>
-            <Pressable onPress={() => {
-              setModalVisible3(!modalVisible3);
-              navigation.replace('Mulai');
-            }} style={{
-              backgroundColor: colors.primary,
-              width: 80,
+            <View style={{
+              backgroundColor: colors.white,
+              height: windowHeight / 2,
               borderRadius: 10,
-              padding: 10,
+              justifyContent: 'center',
+              alignItems: 'center'
             }}>
-              <Text style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: 18,
-                textAlign: 'center',
-              }}>OK</Text>
-            </Pressable>
+              <Image source={require('../../assets/salah.png')} style={{
+                width: '100%',
+                height: windowHeight / 2.7,
+                resizeMode: 'contain'
+              }} />
+              <Pressable onPress={() => {
+                setModalVisible2(!modalVisible2);
+                lanjut();
+              }} style={{
+                backgroundColor: colors.primary,
+                width: 80,
+                borderRadius: 10,
+                padding: 10,
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: 18,
+                  textAlign: 'center',
+                }}>OK</Text>
+              </Pressable>
+            </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
+
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible3}
+          onRequestClose={() => {
+            navigation.replace('Mulai');
+            setModalVisible3(!modalVisible3);
+          }}>
+          <View style={{
+            flex: 1,
+            opacity: 0.8,
+            width: windowWidth,
+            height: windowHeight / 2,
+            backgroundColor: colors.black,
+            justifyContent: 'center',
+            padding: 10,
+          }}>
+            <View style={{
+              backgroundColor: colors.white,
+              height: windowHeight / 2,
+              borderRadius: 10,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              <Image source={require('../../assets/skor.png')} style={{
+                width: '100%',
+                height: windowHeight / 4,
+                resizeMode: 'contain'
+              }} />
+              <Text style={{
+                fontFamily: fonts.secondary[400],
+                fontSize: 30,
+              }}>NILAI</Text>
+              <Text style={{
+                marginVertical: 10,
+                fontFamily: fonts.secondary[600],
+                fontSize: 50,
+              }}>{nilai.reduce((partialSum, a) => partialSum + a, 0)}</Text>
+              <Pressable onPress={() => {
+                setModalVisible3(!modalVisible3);
+                navigation.replace('Mulai');
+              }} style={{
+                backgroundColor: colors.primary,
+                width: 80,
+                borderRadius: 10,
+                padding: 10,
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: 18,
+                  textAlign: 'center',
+                }}>OK</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+      </>}
 
 
     </ImageBackground >
